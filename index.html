@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filtro de Brillo</title>
+    <style>
+        #brightness-filter {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            opacity: 0.5;
+            z-index: 9999;
+            pointer-events: none; /* Permite interactuar con lo que hay debajo */
+        }
+        
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: rgba(255,255,255,0.7);
+            padding: 10px;
+            border-radius: 5px;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="brightness-filter"></div>
+    
+    <div class="controls">
+        <label for="opacity-range">Opacidad: </label>
+        <input type="range" id="opacity-range" min="0" max="1" step="0.05" value="0.5">
+        <button id="close-btn">Cerrar</button>
+    </div>
+
+    <script>
+        const filter = document.getElementById('brightness-filter');
+        const opacityRange = document.getElementById('opacity-range');
+        const closeBtn = document.getElementById('close-btn');
+        
+        opacityRange.addEventListener('input', (e) => {
+            filter.style.opacity = e.target.value;
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            document.body.removeChild(filter);
+            document.body.removeChild(document.querySelector('.controls'));
+        });
+    </script>
+</body>
+</html>
